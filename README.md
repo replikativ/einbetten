@@ -63,15 +63,33 @@ Start a REPL:
 clj -M:repl
 ```
 
+#### Load the Setup Namespace
+
+```clojure
+;; The setup script defines conn, prox-idx, embedder, and search-similar-chunks
+(require '[setup-corpus :refer [conn prox-idx embedder search-similar-chunks]])
+```
+
 #### Basic Semantic Search
 
 ```clojure
-;; Initialize (done automatically by setup, but useful in REPL)
-(require '[datahike.api :as d])
-(require '[proximum.core :as prox])
-(require '[libpython-clj2.python :as py])
+;; Search for chunks by meaning
+(let [query "What is lazy evaluation in functional programming?"
+      eids (search-similar-chunks prox-idx embedder query 5)]
+  (d/q '[:find ?title ?text
+         :in $ [?eid ...]
+         :where
+         [?eid :chunk/text ?text]
+         [?eid :chunk/article ?article]
+         [?article :article/title ?title]]
+       @conn
+       eids))
+```
 
-;; Semantic search: find chunks by meaning
+#### Search with Datalog Function Call
+
+```clojure
+;; Pass search function into Datalog query
 (d/q '[:find ?title ?text
        :in $ ?search-fn ?query
        :where
@@ -81,26 +99,7 @@ clj -M:repl
        [?article :article/title ?title]]
      @conn
      #(search-similar-chunks prox-idx embedder %1 %2)
-     "What is lazy evaluation in functional programming?")
-```
-
-#### Advanced: Semantic Search with Filters
-
-```clojure
-;; Find related chunks within a category
-(d/q '[:find ?title ?text ?related-text
-       :in $ ?search-fn ?category ?k
-       :where
-       [?article :article/title ?title]
-       [?article :article/category ?category]
-       [?chunk :chunk/article ?article]
-       [?chunk :chunk/text ?text]
-       [(?search-fn ?chunk ?k) [?related-eid ...]]
-       [?related-eid :chunk/text ?related-text]]
-     @conn
-     #(search-similar-chunks prox-idx embedder (:chunk/text %) %2)
-     "Programming languages"
-     20)
+     "machine learning algorithms")
 ```
 
 See **[docs/datalog-semantic-search-patterns.md](docs/datalog-semantic-search-patterns.md)** for more query patterns.
