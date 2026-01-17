@@ -1,0 +1,29 @@
+# Data directories (created by setup)
+data/
+.venv/
+
+# Internal development notes
+CLAUDE.md
+DEMO-FINDINGS.md
+CORPUS-README.md
+
+# Corpus files (download separately)
+corpus/
+*.tar.gz
+
+# Clojure
+.cpcache/
+.nrepl-port
+.clj-kondo/
+classes/
+
+# Editor
+.idea/
+*.iml
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
