@@ -8,7 +8,7 @@
 # - corpus/ directory with articles.edn.gz, chunks.edn.gz, embeddings.edn.gz
 # - Python venv with fastembed installed (.venv/bin/python3)
 # - ~4GB RAM
-# - ~2 minutes to complete
+# - ~10 seconds to complete
 #
 
 set -e
@@ -39,13 +39,13 @@ if [ ! -f ".venv/bin/python3" ]; then
 fi
 
 echo "This will:"
-echo "  - Create Datahike database (LMDB backend)"
+echo "  - Create Datahike database (file backend)"
 echo "  - Load articles and chunks"
 echo "  - Create Proximum vector index"
 echo "  - Load pre-computed embeddings"
 echo "  - Test semantic search"
 echo ""
-echo "⏱️  Estimated time: 2 minutes"
+echo "⏱️  Estimated time: ~10 seconds"
 echo ""
 
 # Run setup

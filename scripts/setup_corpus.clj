@@ -6,7 +6,6 @@
     clj -M:setup-corpus          # Quick setup with pre-computed embeddings
     clj -M:setup-corpus --full   # Full setup, regenerate embeddings"
   (:require [datahike.api :as d]
-            [datahike-lmdb.core]
             [proximum.core :as prox]
             [libpython-clj2.python :as py]
             [clojure.string :as str]
@@ -52,7 +51,7 @@
   (println "\n=== Creating Datahike Database ===")
   (println "📍 Path:" DB-PATH)
 
-  (let [config {:store {:backend :lmdb
+  (let [config {:store {:backend :file
                         :path DB-PATH
                         :id #uuid "4d2e8c8e-9a1b-4f7c-b3d4-5e6f7a8b9c0d"}
                 :schema-flexibility :write

@@ -48,7 +48,7 @@ python3 -m venv .venv
 ```
 
 This will:
-- Create Datahike database with LMDB backend (beta)
+- Create Datahike database (file backend)
 - Load 2,000 Wikipedia articles
 - Load ~8,000 text chunks
 - Create Proximum HNSW vector index
@@ -172,7 +172,7 @@ einbetten/
 │   ├── chunks.edn.gz         # Text chunks
 │   └── embeddings.edn.gz     # Pre-computed embeddings
 ├── data/                     # Created by setup.sh
-│   ├── datahike/            # LMDB database
+│   ├── datahike/            # Datahike database
 │   └── prox/                # Proximum vector index
 ├── docs/                     # Documentation
 │   ├── datalog-semantic-search-patterns.md
@@ -196,7 +196,6 @@ einbetten/
 ## Dependencies
 
 - **[Datahike](https://github.com/replikativ/datahike)**: Immutable Datalog database (v0.7.1628)
-- **[Datahike-LMDB](https://github.com/replikativ/datahike-lmdb)**: LMDB storage backend (beta)
 - **[Proximum](https://github.com/replikativ/proximum)**: Pure Clojure vector database
 - **[FastEmbed](https://github.com/qdrant/fastembed)**: Fast embedding generation
 - **[libpython-clj](https://github.com/clj-python/libpython-clj)**: Python interop

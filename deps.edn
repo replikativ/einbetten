@@ -6,11 +6,6 @@
         org.replikativ/datahike {:mvn/version "0.7.1628"}
         org.replikativ/konserve {:mvn/version "0.9.342"}
 
-        ;; LMDB backend (via git)
-        org.replikativ/datahike-lmdb
-        {:git/url "https://github.com/replikativ/datahike-lmdb"
-         :git/sha "77e75b3c3e151984309e78a3f23db8fe20cb44fb"}
-
         ;; Vector Database
         org.replikativ/proximum {:mvn/version "0.1.3"}
 
